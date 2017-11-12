@@ -39,7 +39,7 @@ def mat2img(mat, bf):
 # https://i.imgur.com/KguoTZ9.jpg
 image = Image.open('KguoTZ9.jpg')
 image = image.resize((int(image.size[0]/image.size[1]*400), 400))
-numOfImages=80
+numOfImages=50
 for i in range(numOfImages):
     i1 = Image.new("RGB", (image.size[0], image.size[1]), (120, 150, 200))
 
@@ -88,13 +88,19 @@ for i in range(numOfImages):
                 except:
                     print('err')
             # mat[int(cross.x)][int(cross.y)]=(255,255,255)
-
-    # mat[p1.x][p1.y]=(255,255,255)
-    # mat[p2.x][p2.y]=(255,255,255)
-    # mat[p3.x][p3.y]=(255,255,255)
-    # mat[p4.x][p4.y]=(255,255,255)
-    # mat[fr.x][fr.y]=(255,0,0) #red
-    # mat[to.x][to.y]=(0,0,255) #blue
+    if(1): # teach
+        mat[p1.x][p1.y]=(255,255,255)
+        mat[p2.x][p2.y]=(255,255,255)
+        mat[p3.x][p3.y]=(255,255,255)
+        mat[p4.x][p4.y]=(255,255,255)
+        mat[int(fr.x)][int(fr.y)]=(255,0,0) #red
+        mat[int(fr.x+1)][int(fr.y)]=(255,0,0) #red
+        mat[int(fr.x)][int(fr.y+1)]=(255,0,0) #red
+        mat[int(fr.x+1)][int(fr.y+1)]=(255,0,0) #red
+        mat[int(to.x)][int(to.y)]=(0,0,255) #blue
+        mat[int(to.x+1)][int(to.y)]=(0,0,255) #blue
+        mat[int(to.x)][int(to.y+1)]=(0,0,255) #blue
+        mat[int(to.x+1)][int(to.y+1)]=(0,0,255) #blue
 
     mat2img(mat,i1)
     # i1.show()
