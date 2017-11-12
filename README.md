@@ -9,3 +9,5 @@ The moved one is ↓
 **blue point**: new vanishing point
 
 ![show vanishing points](https://user-images.githubusercontent.com/13133179/32699924-11487358-c801-11e7-9672-16dfe3dfed24.gif)
+
+This script was inspired by the American realist painter, [Edward Hopper](https://en.wikipedia.org/wiki/Edward_Hopper).
