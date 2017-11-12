@@ -36,10 +36,22 @@ def mat2img(mat, bf):
     bf.putdata(pxx)
     return
 
+def getCrossPoint(pixel,hoge,huge):
+    vector_To2Pixel=pixel.minus(to)
+
+    tmpx=huge.x-hoge.x
+    tmpy=huge.y-hoge.y
+    if((tmpy*vector_To2Pixel.x - tmpx*vector_To2Pixel.y)!=0):
+        r=((tmpx*to.y - tmpy*to.x) - (tmpx*hoge.y - tmpy*hoge.x))/(tmpy*vector_To2Pixel.x - tmpx*vector_To2Pixel.y)
+    else:
+        r=((tmpx*to.y - tmpy*to.x) - (tmpx*hoge.y - tmpy*hoge.x))/(0.00001)
+    return to.add(vector_To2Pixel.mul(r)),r
+
 # https://i.imgur.com/KguoTZ9.jpg
 image = Image.open('KguoTZ9.jpg')
 image = image.resize((int(image.size[0]/image.size[1]*400), 400))
 numOfImages=50
+showVanishingPoints = True
 for i in range(numOfImages):
     i1 = Image.new("RGB", (image.size[0], image.size[1]), (120, 150, 200))
 
@@ -53,17 +65,6 @@ for i in range(numOfImages):
     p4=Point(266,269)
     fr = Point(165,127)
     to = Point(165+15*sin(i/numOfImages*2*pi),127+15*cos(i/numOfImages*2*pi))
-
-    def getCrossPoint(pixel,hoge,huge):
-        vector_To2Pixel=pixel.minus(to)
-
-        tmpx=huge.x-hoge.x
-        tmpy=huge.y-hoge.y
-        if((tmpy*vector_To2Pixel.x - tmpx*vector_To2Pixel.y)!=0):
-            r=((tmpx*to.y - tmpy*to.x) - (tmpx*hoge.y - tmpy*hoge.x))/(tmpy*vector_To2Pixel.x - tmpx*vector_To2Pixel.y)
-        else:
-            r=((tmpx*to.y - tmpy*to.x) - (tmpx*hoge.y - tmpy*hoge.x))/(0.00001)
-        return to.add(vector_To2Pixel.mul(r)),r
 
     for x in range(image.size[1]):
         for y in range(image.size[0]):
@@ -87,8 +88,9 @@ for i in range(numOfImages):
                     mat[int(pixel.x)][int(pixel.y)]=cpymat[int(targetPixel.x)%image.size[1]][int(targetPixel.y)%image.size[0]]
                 except:
                     print('err')
-            # mat[int(cross.x)][int(cross.y)]=(255,255,255)
-    if(1): # teach
+            if(showVanishingPoints):
+                mat[int(cross.x)][int(cross.y)]=(255,255,255)
+    if(showVanishingPoints): # show vanishing points
         mat[p1.x][p1.y]=(255,255,255)
         mat[p2.x][p2.y]=(255,255,255)
         mat[p3.x][p3.y]=(255,255,255)
