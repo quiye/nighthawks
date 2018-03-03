@@ -110,7 +110,7 @@ def generate(i):
         # set color RED
         setcolor(fr, (255,0,0))
         # set color BLUE
-        setcolor(to, (0,255,255))
+        setcolor(to, (0,0,255))
 
     mat2img(mat,i1)
     i1.save(str(i).zfill(3) + ".png")
