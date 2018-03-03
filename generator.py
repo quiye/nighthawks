@@ -56,12 +56,11 @@ def mat2img(mat, bf):
 def getCrossPoint(pixel,hoge,huge,to):
     vector_To2Pixel=pixel.minus(to)
 
-    tmpx=huge.x-hoge.x
-    tmpy=huge.y-hoge.y
-    if((tmpy*vector_To2Pixel.x - tmpx*vector_To2Pixel.y)!=0):
-        r=((tmpx*to.y - tmpy*to.x) - (tmpx*hoge.y - tmpy*hoge.x))/(tmpy*vector_To2Pixel.x - tmpx*vector_To2Pixel.y)
+    tmp = huge.minus(hoge)
+    if((tmp.y*vector_To2Pixel.x - tmp.x*vector_To2Pixel.y)!=0):
+        r=((tmp.x*to.y - tmp.y*to.x) - (tmp.x*hoge.y - tmp.y*hoge.x))/(tmp.y*vector_To2Pixel.x - tmp.x*vector_To2Pixel.y)
     else:
-        r=((tmpx*to.y - tmpy*to.x) - (tmpx*hoge.y - tmpy*hoge.x))/(0.00001)
+        r=((tmp.x*to.y - tmp.y*to.x) - (tmp.x*hoge.y - tmp.y*hoge.x))/(0.00001)
     return to.add(vector_To2Pixel.mul(r)),r
 
 
