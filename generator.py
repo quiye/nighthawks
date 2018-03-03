@@ -12,10 +12,10 @@ from multiprocessing import Pool
 multiprocess_mode = "pool"
 
 # 作成する画像数
-numOfImages=5
+numOfImages=60
 
 # 消失点の表示
-showVanishingPoints = True
+showVanishingPoints = False
 
 # https://i.imgur.com/KguoTZ9.jpg
 image = Image.open('KguoTZ9.jpg')
@@ -96,11 +96,10 @@ def generate(i):
                     r=ratios[j]
 
             targetPixel=fr.add((cross.minus(fr)).mul(1/r))
-            if(r<1):
-                try:
-                    mat[int(pixel.x)][int(pixel.y)]=cpymat[int(targetPixel.x)%image.size[1]][int(targetPixel.y)%image.size[0]]
-                except:
-                    print('err')
+            if r < 1:
+                mat[int(pixel.x)][int(pixel.y)]=cpymat[(int(targetPixel.x)+int(to.x)-int(fr.x)+image.size[1])%image.size[1]][(int(targetPixel.y)+int(to.y)-int(fr.y)+image.size[0])%image.size[0]]
+            else:
+                mat[int(pixel.x)][int(pixel.y)]=cpymat[(int(pixel.x)+int(to.x)-int(fr.x)+image.size[1])%image.size[1]][(int(pixel.y)+int(to.y)-int(fr.y)+image.size[0])%image.size[0]]
             if(showVanishingPoints):
                 mat[int(cross.x)][int(cross.y)]=(255,255,255)
     if(showVanishingPoints): # show vanishing points
